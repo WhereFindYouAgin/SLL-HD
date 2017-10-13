@@ -11,8 +11,19 @@
 #import "UIBarButtonItem+Extension.h"
 #import "UIView+Extension.h"
 #import "HomeTopItem.h"
+#import "Const.h"
+#import "CateGoryViewController.h"
 
 @interface HomeViewController ()
+@property (nonatomic, weak) UIBarButtonItem *categoryItem;
+
+@property (nonatomic, weak) UIBarButtonItem *districtItem;
+
+@property (nonatomic, weak) UIBarButtonItem *sortItem;
+
+@property (nonatomic, strong) UIPopoverController *popover;
+
+
 
 @end
 
@@ -30,15 +41,20 @@
     UIBarButtonItem *logoBar = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_meituan_logo"] style:UIBarButtonItemStyleDone target:self action:nil];
     logoBar.enabled = NO;
     //2 , 分类
-    HomeTopItem *catergoyItem = [HomeTopItem item];
-    UIBarButtonItem *category = [[UIBarButtonItem alloc] initWithCustomView:catergoyItem];
+    HomeTopItem *catergoyTopItem = [HomeTopItem item];
+    [catergoyTopItem addTarget:self action:@selector(categoryClick)];
+    UIBarButtonItem *category = [[UIBarButtonItem alloc] initWithCustomView:catergoyTopItem];
+    self.categoryItem = category;
     //3 , 地区
-    HomeTopItem *districtItem = [HomeTopItem item];
-    UIBarButtonItem *district = [[UIBarButtonItem alloc] initWithCustomView:districtItem];
+    HomeTopItem *districtTopItem = [HomeTopItem item];
+    [districtTopItem addTarget:self action:@selector(districtClick)];
+    UIBarButtonItem *district = [[UIBarButtonItem alloc] initWithCustomView:districtTopItem];
+    self.districtItem = district;
     //4 , 排序
-    HomeTopItem *sortItem = [HomeTopItem item];
-    UIBarButtonItem *sort = [[UIBarButtonItem alloc] initWithCustomView:sortItem];
-    
+    HomeTopItem *sortTopItem = [HomeTopItem item];
+    [sortTopItem addTarget:self action:@selector(sortClick)];
+    UIBarButtonItem *sort = [[UIBarButtonItem alloc] initWithCustomView:sortTopItem];
+    self.sortItem = sort;
     
     self.navigationItem.leftBarButtonItems = @[logoBar, category, district, sort];
 }
@@ -55,5 +71,23 @@
     
 }
 
+- (void)categoryClick{
+    CateGoryViewController *contVC = [[CateGoryViewController alloc]init];
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:contVC];
+    [popover presentPopoverFromBarButtonItem:self.categoryItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    self.popover = popover;
+    
+    
+}
 
+- (void)districtClick
+{
+    DLog(@"districtClick");
+    
+}
+
+- (void)sortClick
+{
+    DLog(@"sortClick");
+}
 @end

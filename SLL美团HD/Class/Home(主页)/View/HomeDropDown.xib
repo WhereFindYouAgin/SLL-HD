@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HomeDropDown">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="382"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fyY-qe-NtU" userLabel="主表">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="382"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="CQS-pY-pzi"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="WE1-6Q-tEv"/>
+                    </connections>
+                </tableView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LLC-wA-l4P" userLabel="从表">
+                    <rect key="frame" x="200" y="0.0" width="200" height="382"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="6LE-BF-QxC"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="L9i-Gx-2lD"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fyY-qe-NtU" firstAttribute="width" secondItem="LLC-wA-l4P" secondAttribute="width" id="0OR-za-LCu"/>
+                <constraint firstItem="fyY-qe-NtU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9rZ-NH-2iA"/>
+                <constraint firstItem="LLC-wA-l4P" firstAttribute="leading" secondItem="fyY-qe-NtU" secondAttribute="trailing" id="B3v-Gx-37w"/>
+                <constraint firstAttribute="bottom" secondItem="fyY-qe-NtU" secondAttribute="bottom" id="Fdt-Mr-yCQ"/>
+                <constraint firstAttribute="bottom" secondItem="LLC-wA-l4P" secondAttribute="bottom" id="HaM-rt-gTl"/>
+                <constraint firstItem="LLC-wA-l4P" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OEP-6K-pUh"/>
+                <constraint firstAttribute="trailing" secondItem="LLC-wA-l4P" secondAttribute="trailing" id="gUv-s2-YWm"/>
+                <constraint firstItem="fyY-qe-NtU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xw7-X6-HNS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="mainTableView" destination="fyY-qe-NtU" id="Ukw-eT-tHp"/>
+                <outlet property="subTableView" destination="LLC-wA-l4P" id="O36-HK-t7T"/>
+            </connections>
+            <point key="canvasLocation" x="126" y="-254"/>
+        </view>
+    </objects>
+</document>

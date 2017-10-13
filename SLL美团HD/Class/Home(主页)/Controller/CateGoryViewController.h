@@ -1,5 +1,5 @@
 //
-//  HomeTopItem.h
+//  CateGoryViewController.h
 //  SLL美团HD
 //
 //  Created by sll on 2017/10/13.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeTopItem : UIView
-+ (instancetype)item;
+@interface CateGoryViewController : UIViewController
 
-- (void)addTarget:(id)target action:(SEL)action;
 @end
