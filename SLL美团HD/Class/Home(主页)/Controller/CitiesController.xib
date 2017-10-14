@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CitiesController">
+            <connections>
+                <outlet property="tableView" destination="DHr-Cp-Cpp" id="drm-ve-014"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" placeholder="搜索城市名或拼音" backgroundImage="bg_login_textfield" translatesAutoresizingMaskIntoConstraints="NO" id="Gin-eB-8Vc">
+                    <rect key="frame" x="5" y="5" width="365" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="fDM-dt-NEM"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="0du-3w-6Dq"/>
+                    </connections>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DHr-Cp-Cpp">
+                    <rect key="frame" x="0.0" y="60" width="375" height="607"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Yvq-6x-erw"/>
+                        <outlet property="delegate" destination="-1" id="DPI-Hq-L9D"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="DHr-Cp-Cpp" secondAttribute="trailing" id="Bga-4H-0FW"/>
+                <constraint firstAttribute="trailing" secondItem="Gin-eB-8Vc" secondAttribute="trailing" constant="5" id="eAG-M0-sV9"/>
+                <constraint firstItem="DHr-Cp-Cpp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eqb-kb-GDa"/>
+                <constraint firstItem="Gin-eB-8Vc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="jIH-pH-fEg"/>
+                <constraint firstItem="Gin-eB-8Vc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="kLe-vk-dWm"/>
+                <constraint firstItem="DHr-Cp-Cpp" firstAttribute="top" secondItem="Gin-eB-8Vc" secondAttribute="bottom" constant="5" id="opT-F1-Yf0"/>
+                <constraint firstAttribute="bottom" secondItem="DHr-Cp-Cpp" secondAttribute="bottom" id="rGh-Dl-cR9"/>
+            </constraints>
+            <point key="canvasLocation" x="-124" y="-168"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_login_textfield" width="8" height="8"/>
+    </resources>
+</document>

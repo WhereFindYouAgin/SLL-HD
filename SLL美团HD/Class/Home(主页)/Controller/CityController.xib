@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CityController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22E-y6-GUJ" userLabel="改变区域View">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBN-6i-Eh9">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" image="btn_changeCity">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="切换城市">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="18"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </state>
+                            <state key="highlighted" image="btn_changeCity_selected"/>
+                            <connections>
+                                <action selector="changeCityClick:" destination="-1" eventType="touchUpInside" id="9GU-85-tWE"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_cell_rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="LnO-Pj-Jbc">
+                            <rect key="frame" x="343" y="13.5" width="17" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="2ZR-iR-3xu"/>
+                                <constraint firstAttribute="width" constant="17" id="8HF-NA-TM8"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="dBN-6i-Eh9" firstAttribute="top" secondItem="22E-y6-GUJ" secondAttribute="top" id="V5C-Vl-UA3"/>
+                        <constraint firstItem="dBN-6i-Eh9" firstAttribute="leading" secondItem="22E-y6-GUJ" secondAttribute="leading" id="YFS-Ks-dQ5"/>
+                        <constraint firstAttribute="trailing" secondItem="LnO-Pj-Jbc" secondAttribute="trailing" constant="15" id="Yki-lK-Y7P"/>
+                        <constraint firstItem="LnO-Pj-Jbc" firstAttribute="centerY" secondItem="22E-y6-GUJ" secondAttribute="centerY" id="eFF-KF-ylY"/>
+                        <constraint firstAttribute="height" constant="44" id="fuP-Wf-nnB"/>
+                        <constraint firstAttribute="trailing" secondItem="dBN-6i-Eh9" secondAttribute="trailing" id="gsC-hl-YBG"/>
+                        <constraint firstAttribute="bottom" secondItem="dBN-6i-Eh9" secondAttribute="bottom" id="h1P-Os-aO6"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="22E-y6-GUJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9gS-h9-JTQ"/>
+                <constraint firstItem="22E-y6-GUJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GXT-Td-0oN"/>
+                <constraint firstAttribute="trailing" secondItem="22E-y6-GUJ" secondAttribute="trailing" id="vYK-0w-92I"/>
+            </constraints>
+            <point key="canvasLocation" x="30" y="-49"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_changeCity" width="30" height="30"/>
+        <image name="btn_changeCity_selected" width="30" height="30"/>
+        <image name="icon_cell_rightArrow" width="17" height="17"/>
+    </resources>
+</document>

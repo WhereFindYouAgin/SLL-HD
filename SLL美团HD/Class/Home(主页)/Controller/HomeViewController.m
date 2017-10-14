@@ -13,6 +13,8 @@
 #import "HomeTopItem.h"
 #import "Const.h"
 #import "CateGoryViewController.h"
+#import "CityController.h"
+#import "NavigationController.h"
 
 @interface HomeViewController ()
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
@@ -82,8 +84,9 @@
 
 - (void)districtClick
 {
-    DLog(@"districtClick");
-    
+    CityController *contVC = [[CityController alloc]init];
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:contVC];
+    [popover presentPopoverFromBarButtonItem:self.districtItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)sortClick
