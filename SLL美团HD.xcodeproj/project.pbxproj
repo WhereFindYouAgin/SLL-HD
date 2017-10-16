@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F5252D01F94A04300613FC5 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5252CE1F94A04300613FC5 /* UIView+AutoLayout.m */; };
+		5F5252D31F94A52E00613FC5 /* CitySearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5252D21F94A52E00613FC5 /* CitySearchResultController.m */; };
 		5F5F3C721F54095300C30DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F3C711F54095300C30DF9 /* main.m */; };
 		5F5F3C751F54095300C30DF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F3C741F54095300C30DF9 /* AppDelegate.m */; };
 		5F5F3C781F54096000C30DF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F3C771F54095C00C30DF9 /* ViewController.m */; };
@@ -79,6 +81,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5F5252CE1F94A04300613FC5 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		5F5252CF1F94A04300613FC5 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		5F5252D11F94A52E00613FC5 /* CitySearchResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CitySearchResultController.h; sourceTree = "<group>"; };
+		5F5252D21F94A52E00613FC5 /* CitySearchResultController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CitySearchResultController.m; sourceTree = "<group>"; };
 		5F5F3C6D1F54095300C30DF9 /* SLL美团HD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SLL美团HD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F5F3C711F54095300C30DF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5F5F3C731F54095300C30DF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -313,6 +319,8 @@
 				F9EA32B01F91ECEA004CE4E4 /* CitiesController.h */,
 				F9EA32B11F91ECEA004CE4E4 /* CitiesController.m */,
 				F9EA32B21F91ECEA004CE4E4 /* CitiesController.xib */,
+				5F5252D11F94A52E00613FC5 /* CitySearchResultController.h */,
+				5F5252D21F94A52E00613FC5 /* CitySearchResultController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -372,6 +380,8 @@
 		5F65AC971F90982500D8E246 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				5F5252CF1F94A04300613FC5 /* UIView+AutoLayout.h */,
+				5F5252CE1F94A04300613FC5 /* UIView+AutoLayout.m */,
 				5F65AC871F90893100D8E246 /* UIBarButtonItem+Extension.h */,
 				5F65AC881F90893100D8E246 /* UIBarButtonItem+Extension.m */,
 				5F65AC851F9088E700D8E246 /* UIView+Extension.h */,
@@ -623,12 +633,14 @@
 				F9EA32D21F91F4CE004CE4E4 /* MASViewConstraint.m in Sources */,
 				5F5F3C781F54096000C30DF9 /* ViewController.m in Sources */,
 				F9B9EF601F90DB9300A36BA2 /* MTCategory.m in Sources */,
+				5F5252D31F94A52E00613FC5 /* CitySearchResultController.m in Sources */,
 				F9B9F0141F90E45800A36BA2 /* NSObject+MJMember.m in Sources */,
 				5F5F3C751F54095300C30DF9 /* AppDelegate.m in Sources */,
 				F9B9F00F1F90E45800A36BA2 /* MJMethod.m in Sources */,
 				5F65AC7F1F90869200D8E246 /* NavigationController.m in Sources */,
 				F9EA32AE1F91E73A004CE4E4 /* CityController.m in Sources */,
 				F9B9F00A1F90E45800A36BA2 /* MJArgument.m in Sources */,
+				5F5252D01F94A04300613FC5 /* UIView+AutoLayout.m in Sources */,
 				F9B9F0121F90E45800A36BA2 /* NSObject+MJCoding.m in Sources */,
 				F9EA32D41F91F4CE004CE4E4 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				F9EA32D01F91F4CE004CE4E4 /* MASLayoutConstraint.m in Sources */,

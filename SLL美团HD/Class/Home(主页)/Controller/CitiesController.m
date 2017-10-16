@@ -9,9 +9,13 @@
 #import "CitiesController.h"
 #import "UIBarButtonItem+Extension.h"
 #import "UIView+Extension.h"
+#import "UIView+AutoLayout.h"
 #import "Masonry.h"
 #import "CityGroup.h"
 #import "MJExtension.h"
+#import "Const.h"
+
+#import "CitySearchResultController.h"
 
 #define CoverTag 101
 
@@ -19,12 +23,29 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *cityGroups;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (weak, nonatomic) IBOutlet UIButton *cover;
+@property (nonatomic, weak) CitySearchResultController *citySearchResultController;
+
 
 
 @end
 const int MTCoverTag = 999;
 @implementation CitiesController
 
+- (CitySearchResultController *)citySearchResultController
+{
+    if (_citySearchResultController == nil) {
+        CitySearchResultController  *citySearchResultController = [[CitySearchResultController alloc] init];
+        [self addChildViewController:citySearchResultController];
+        self.citySearchResultController = citySearchResultController;
+        [self.view addSubview:citySearchResultController.view];
+        [citySearchResultController.view autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+        [citySearchResultController.view autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.searchBar withOffset:5];
+    }
+    return _citySearchResultController;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
@@ -42,31 +63,58 @@ const int MTCoverTag = 999;
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
 }
+- (IBAction)coverHiden {
+    [self.searchBar resignFirstResponder];
+}
 
 #pragma mark -- searchBar Delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     //CGRectMake(0, 54, self.tableView.width, self.tableView.height)
-    UIView *cover = [[UIView alloc] init];//WithFrame:self.tableView.bounds];
-    cover.backgroundColor = [UIColor blackColor];
-    cover.alpha = 0.3;
-    cover.tag = MTCoverTag;
-    [cover addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:searchBar action:@selector(resignFirstResponder)]];
-    [self.view addSubview:cover];
-    [cover mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.tableView.mas_left);
-        make.right.equalTo(self.tableView.mas_right);
-        make.top.equalTo(self.tableView.mas_top);
-        make.bottom.equalTo(self.tableView.mas_bottom);
-    }];
+//    UIView *cover = [[UIView alloc] init];//WithFrame:self.tableView.bounds];
+//    cover.backgroundColor = [UIColor blackColor];
+//    cover.alpha = 0.3;
+//    cover.tag = MTCoverTag;
+//    [cover addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:searchBar action:@selector(resignFirstResponder)]];
+//    [self.view addSubview:cover];
+//    [cover mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.tableView.mas_left);
+//        make.right.equalTo(self.tableView.mas_right);
+//        make.top.equalTo(self.tableView.mas_top);
+//        make.bottom.equalTo(self.tableView.mas_bottom);
+//    }];
+    searchBar.showsCancelButton = YES;
+    searchBar.tintColor = MTColor(47, 178, 157);
     [searchBar setBackgroundImage:[UIImage imageNamed:@"bg_login_textfield_hl"]];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.cover.alpha = 0.5;
+    }];
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+    
 }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [[self.view viewWithTag:MTCoverTag] removeFromSuperview];
+//    [[self.view viewWithTag:MTCoverTag] removeFromSuperview];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.cover.alpha = 0.0;
+    }];
     [searchBar setBackgroundImage:[UIImage imageNamed:@"bg_login_textfield"]];
 
+}
+//搜索框文字改变
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+   
+    if (searchText.length > 0) {
+        self.citySearchResultController.view.hidden = NO;
+        self.citySearchResultController.searchText = searchText;
+
+    }else{
+        self.citySearchResultController.view.hidden = YES;
+
+    }
 }
 
 #pragma mark -- tableview datasource and Delegate

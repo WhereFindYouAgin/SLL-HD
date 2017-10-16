@@ -12,4 +12,8 @@
 + (instancetype)item;
 
 - (void)addTarget:(id)target action:(SEL)action;
+
+- (void)setName:(NSString*)name;
+- (void)setSubName:(NSString *)subName;
+- (void)setIcon:(NSString *)icon helighIcon:(NSString*)helighIcon;
 @end

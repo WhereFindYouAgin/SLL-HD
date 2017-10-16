@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CitiesController">
             <connections>
+                <outlet property="cover" destination="QU9-6g-Tb3" id="tKU-Ix-TZb"/>
+                <outlet property="searchBar" destination="Gin-eB-8Vc" id="FG5-QQ-iyc"/>
                 <outlet property="tableView" destination="DHr-Cp-Cpp" id="drm-ve-014"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -38,12 +40,23 @@
                         <outlet property="delegate" destination="-1" id="DPI-Hq-L9D"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QU9-6g-Tb3">
+                    <rect key="frame" x="0.0" y="60" width="375" height="607"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="coverHiden" destination="-1" eventType="touchUpInside" id="rMI-fM-UqT"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="DHr-Cp-Cpp" secondAttribute="trailing" id="Bga-4H-0FW"/>
+                <constraint firstItem="QU9-6g-Tb3" firstAttribute="top" secondItem="Gin-eB-8Vc" secondAttribute="bottom" constant="5" id="aXL-Lp-cPd"/>
                 <constraint firstAttribute="trailing" secondItem="Gin-eB-8Vc" secondAttribute="trailing" constant="5" id="eAG-M0-sV9"/>
                 <constraint firstItem="DHr-Cp-Cpp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eqb-kb-GDa"/>
+                <constraint firstAttribute="bottom" secondItem="QU9-6g-Tb3" secondAttribute="bottom" id="fB5-2t-fif"/>
+                <constraint firstAttribute="trailing" secondItem="QU9-6g-Tb3" secondAttribute="trailing" id="hIq-TE-Tl1"/>
+                <constraint firstItem="QU9-6g-Tb3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hwZ-T6-VKv"/>
                 <constraint firstItem="Gin-eB-8Vc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="jIH-pH-fEg"/>
                 <constraint firstItem="Gin-eB-8Vc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="kLe-vk-dWm"/>
                 <constraint firstItem="DHr-Cp-Cpp" firstAttribute="top" secondItem="Gin-eB-8Vc" secondAttribute="bottom" constant="5" id="opT-F1-Yf0"/>

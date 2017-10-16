@@ -8,3 +8,6 @@
 
 #import "Const.h"
 
+NSString *const CityDidChangeNotification = @"CityDidChangeNotification";
+NSString *const SelectCityName = @"SelectCityName";
+

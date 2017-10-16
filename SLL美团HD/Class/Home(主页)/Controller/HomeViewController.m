@@ -15,6 +15,7 @@
 #import "CateGoryViewController.h"
 #import "CityController.h"
 #import "NavigationController.h"
+#import "City.h"
 
 @interface HomeViewController ()
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
@@ -36,6 +37,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setUpLeftNav];
     [self setupRightNav];
+    [MTNotificationCenter addObserver:self selector:@selector(changeCityName:) name:CityDidChangeNotification object:nil];
+}
+- (void)changeCityName:(NSNotification *)notifiction{
+    NSString *cityName = notifiction.userInfo[SelectCityName];
+    HomeTopItem *cityTopItem = (HomeTopItem *)self.districtItem.customView;
+    [cityTopItem setName:[NSString stringWithFormat:@"%@--全部",cityName]];
+    
 }
 - (void)setUpLeftNav
 {
@@ -92,5 +100,9 @@
 - (void)sortClick
 {
     DLog(@"sortClick");
+}
+- (void)dealloc{
+    
+    [MTNotificationCenter removeObserver:self];
 }
 @end
