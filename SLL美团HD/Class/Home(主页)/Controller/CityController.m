@@ -9,8 +9,11 @@
 #import "CityController.h"
 #import "CitiesController.h"
 #import "NavigationController.h"
+#import "HomeDropDown.h"
+#import "Regions.h"
+#import "UIView+Extension.h"
 
-@interface CityController ()
+@interface CityController ()<HomeDropDownDataSource>
 
 @end
 
@@ -18,7 +21,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    UIView *title = [[self.view subviews] firstObject];
+    HomeDropDown *homeDropDown = [HomeDropDown dropDown];
+    homeDropDown.y = title.height;
+    homeDropDown.dataSource = self;
+    [self.view addSubview:homeDropDown];
+    // 设置控制器在popover中的尺寸
+    self.preferredContentSize = CGSizeMake(homeDropDown.width, CGRectGetMaxY(homeDropDown.frame));
 }
 - (IBAction)changeCityClick:(id)sender {
     CitiesController *contVC = [[CitiesController alloc]init];
@@ -27,7 +36,19 @@
     [self presentViewController:nav animated:YES completion:nil];
     
 }
+#pragma mark -- HomeDropDownDataSource
+-(NSInteger)numberOfRowInMainTableView:(HomeDropDown *)homeDropdown{
+    return self.regions.count;
+}
+- (NSString *)homeDropDown:(HomeDropDown *)homeDropDown titleForRowInMainTable:(NSInteger)row{
+    Regions *region = self.regions[row];
+    return region.name;
+}
 
+- (NSArray *)homeDropDown:(HomeDropDown *)homeDropDown subTitleDateForRowInMainTable:(NSInteger)row{
+    Regions *region = self.regions[row];
+    return region.subregions;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

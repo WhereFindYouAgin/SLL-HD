@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CityController : UIViewController
+@property (nonatomic, strong) NSArray *regions;
+
 
 @end

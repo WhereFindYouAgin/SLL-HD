@@ -10,10 +10,10 @@
 
 #import "UIView+Extension.h"
 #import "HomeDropDown.h"
-#import "MJExtension.h"
 #import "MTCategory.h"
+#import "MetaTool.h"
 
-@interface CateGoryViewController ()
+@interface CateGoryViewController ()<HomeDropDownDataSource>
 
 @end
 
@@ -23,11 +23,36 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     HomeDropDown *dropdown = [HomeDropDown dropDown];
-    dropdown.categories = [MTCategory objectArrayWithFilename:@"categories.plist"];
+    dropdown.dataSource = self;
     
     [self.view addSubview:dropdown];
     self.preferredContentSize = dropdown.size;
 }
+
+#pragma mark -- HomeDropDownDataSource
+
+- (NSInteger)numberOfRowInMainTableView:(HomeDropDown *)homeDropdown{
+    return [[MetaTool categories] count];
+}
+- (NSString *)homeDropDown:(HomeDropDown *)homeDropDown titleForRowInMainTable:(NSInteger)row{
+    MTCategory *category = [MetaTool categories][row];
+    return category.name;
+}
+- (NSString *)homeDropDownh:(HomeDropDown *)homeDropDown iconForRowInMainTable:(NSInteger)row{
+    MTCategory *category = [MetaTool categories][row];
+    return category.small_icon;
+}
+
+- (NSString *)homeDropDownh:(HomeDropDown *)homeDropDown selectedForRowInMainTable:(NSInteger)row{
+    MTCategory *category = [MetaTool categories][row];
+    return category.small_highlighted_icon;
+}
+
+- (NSArray *)homeDropDown:(HomeDropDown *)homeDropDown subTitleDateForRowInMainTable:(NSInteger)row{
+    MTCategory *category = [MetaTool categories][row];
+    return category.subcategories;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -14,6 +14,8 @@
 #import "CityGroup.h"
 #import "MJExtension.h"
 #import "Const.h"
+#import "City.h"
+#import "MetaTool.h"
 
 #import "CitySearchResultController.h"
 
@@ -151,5 +153,11 @@ const int MTCoverTag = 999;
     //    }
     //    return titles;
     return [self.cityGroups valueForKeyPath:@"title"];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    CityGroup *group = self.cityGroups[indexPath.section];
+    [MTNotificationCenter postNotificationName:CityDidChangeNotification object:nil userInfo:@{ SelectCityName : group.cities[indexPath.row]}];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 @end

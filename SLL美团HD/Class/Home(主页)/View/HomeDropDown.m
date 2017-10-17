@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (weak, nonatomic) IBOutlet UITableView *subTableView;
 
-@property (nonatomic, strong) MTCategory *selectCategory;
+@property (nonatomic, assign) NSInteger selectRow;
 
 
 @end
@@ -39,33 +39,39 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == self.mainTableView) {
-        return self.categories.count;
+        return [self.dataSource numberOfRowInMainTableView:self];
     }else{
-        
-        return  self.selectCategory.subcategories.count;
+        return [[self.dataSource homeDropDown:self subTitleDateForRowInMainTable:self.selectRow] count];
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.mainTableView) {
         MainCell *cell = [MainCell cellWithTaleView:tableView];
-        MTCategory *myCategory = self.categories[indexPath.row];
-        if (myCategory.subcategories ) {
+        cell.textLabel.text = [self.dataSource homeDropDown:self titleForRowInMainTable:indexPath.row];
+        NSArray *subRegions = [self.dataSource homeDropDown:self subTitleDateForRowInMainTable:indexPath.row];
+        if (subRegions.count) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }else{
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
-        cell.textLabel.text = myCategory.name;
-        cell.imageView.image = [UIImage imageNamed:myCategory.small_icon];
+        if ([self.dataSource respondsToSelector:@selector(homeDropDownh:iconForRowInMainTable:)]) {
+            cell.imageView.image = [UIImage imageNamed:[self.dataSource homeDropDownh:self iconForRowInMainTable:indexPath.row]];
+        }
+        if ([self.dataSource respondsToSelector:@selector(homeDropDownh:selectedForRowInMainTable:)]) {
+            cell.imageView.highlightedImage = [UIImage imageNamed:[self.dataSource homeDropDownh:self selectedForRowInMainTable:indexPath.row]];
+        }
+        
         return cell;
     }else{
         SubCell *cell = [SubCell cellWithTaleView:tableView];
-        cell.textLabel.text = self.selectCategory.subcategories[indexPath.row];
+        NSArray *subRegions = [self.dataSource homeDropDown:self subTitleDateForRowInMainTable:self.selectRow];
+        cell.textLabel.text = subRegions[indexPath.row];
         return cell;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.mainTableView) {
-        self.selectCategory = self.categories[indexPath.row];
+        self.selectRow = indexPath.row;
         [self.subTableView reloadData];
     }
 }

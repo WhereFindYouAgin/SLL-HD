@@ -27,6 +27,7 @@
 		5F65ACA01F909C7900D8E246 /* HomeDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F65AC9F1F909C7900D8E246 /* HomeDropDown.m */; };
 		5F65ACA21F909C8800D8E246 /* HomeDropDown.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F65ACA11F909C8800D8E246 /* HomeDropDown.xib */; };
 		5F65ACA81F90A10600D8E246 /* CateGoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F65ACA71F90A10600D8E246 /* CateGoryViewController.m */; };
+		5FA81DDD1F95A91400DD96A9 /* MetaTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA81DDC1F95A91400DD96A9 /* MetaTool.m */; };
 		F9B9EF601F90DB9300A36BA2 /* MTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EF5F1F90DB9300A36BA2 /* MTCategory.m */; };
 		F9B9F00A1F90E45800A36BA2 /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EFF41F90E45600A36BA2 /* MJArgument.m */; };
 		F9B9F00B1F90E45800A36BA2 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EFF61F90E45600A36BA2 /* MJConst.m */; };
@@ -119,6 +120,8 @@
 		5F65ACA11F909C8800D8E246 /* HomeDropDown.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeDropDown.xib; sourceTree = "<group>"; };
 		5F65ACA61F90A10600D8E246 /* CateGoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CateGoryViewController.h; sourceTree = "<group>"; };
 		5F65ACA71F90A10600D8E246 /* CateGoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CateGoryViewController.m; sourceTree = "<group>"; };
+		5FA81DDB1F95A91400DD96A9 /* MetaTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetaTool.h; sourceTree = "<group>"; };
+		5FA81DDC1F95A91400DD96A9 /* MetaTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetaTool.m; sourceTree = "<group>"; };
 		F9B9EF5E1F90DB9300A36BA2 /* MTCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTCategory.h; sourceTree = "<group>"; };
 		F9B9EF5F1F90DB9300A36BA2 /* MTCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTCategory.m; sourceTree = "<group>"; };
 		F9B9EFF31F90E45600A36BA2 /* MJArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJArgument.h; sourceTree = "<group>"; };
@@ -236,6 +239,7 @@
 		5F1ADAEB1F90810A00B8545C /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				5FA81DDA1F95A8A800DD96A9 /* Tool */,
 				5F65AC981F90982700D8E246 /* Lib */,
 				5F65AC971F90982500D8E246 /* Category */,
 				5F65AC961F90982300D8E246 /* Controller */,
@@ -397,6 +401,16 @@
 				F9B9EFF21F90E45600A36BA2 /* MJExtension */,
 			);
 			path = Lib;
+			sourceTree = "<group>";
+		};
+		5FA81DDA1F95A8A800DD96A9 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				5FA81DDB1F95A91400DD96A9 /* MetaTool.h */,
+				5FA81DDC1F95A91400DD96A9 /* MetaTool.m */,
+			);
+			name = Tool;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		F9B9EFF21F90E45600A36BA2 /* MJExtension */ = {
@@ -640,6 +654,7 @@
 				5F65AC7F1F90869200D8E246 /* NavigationController.m in Sources */,
 				F9EA32AE1F91E73A004CE4E4 /* CityController.m in Sources */,
 				F9B9F00A1F90E45800A36BA2 /* MJArgument.m in Sources */,
+				5FA81DDD1F95A91400DD96A9 /* MetaTool.m in Sources */,
 				5F5252D01F94A04300613FC5 /* UIView+AutoLayout.m in Sources */,
 				F9B9F0121F90E45800A36BA2 /* NSObject+MJCoding.m in Sources */,
 				F9EA32D41F91F4CE004CE4E4 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

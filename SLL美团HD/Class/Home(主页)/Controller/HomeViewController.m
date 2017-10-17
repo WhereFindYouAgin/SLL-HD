@@ -16,6 +16,7 @@
 #import "CityController.h"
 #import "NavigationController.h"
 #import "City.h"
+#import "MetaTool.h"
 
 @interface HomeViewController ()
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
@@ -25,6 +26,8 @@
 @property (nonatomic, weak) UIBarButtonItem *sortItem;
 
 @property (nonatomic, strong) UIPopoverController *popover;
+
+@property (nonatomic, copy) NSString *cityName;
 
 
 
@@ -40,9 +43,9 @@
     [MTNotificationCenter addObserver:self selector:@selector(changeCityName:) name:CityDidChangeNotification object:nil];
 }
 - (void)changeCityName:(NSNotification *)notifiction{
-    NSString *cityName = notifiction.userInfo[SelectCityName];
+    self.cityName = notifiction.userInfo[SelectCityName];
     HomeTopItem *cityTopItem = (HomeTopItem *)self.districtItem.customView;
-    [cityTopItem setName:[NSString stringWithFormat:@"%@--全部",cityName]];
+    [cityTopItem setName:[NSString stringWithFormat:@"%@--全部",self.cityName]];
     
 }
 - (void)setUpLeftNav
@@ -86,13 +89,13 @@
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:contVC];
     [popover presentPopoverFromBarButtonItem:self.categoryItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     self.popover = popover;
-    
-    
 }
 
 - (void)districtClick
 {
+    City *city = [[[MetaTool cities] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name = %@", self.cityName]] firstObject] ;
     CityController *contVC = [[CityController alloc]init];
+    contVC.regions = city.regions;
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:contVC];
     [popover presentPopoverFromBarButtonItem:self.districtItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
