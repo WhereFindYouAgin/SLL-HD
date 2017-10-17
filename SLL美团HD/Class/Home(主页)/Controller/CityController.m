@@ -12,8 +12,9 @@
 #import "HomeDropDown.h"
 #import "Regions.h"
 #import "UIView+Extension.h"
+#import "Const.h"
 
-@interface CityController ()<HomeDropDownDataSource>
+@interface CityController ()<HomeDropDownDataSource ,HomeDropDownDelegate>
 
 @end
 
@@ -25,15 +26,17 @@
     HomeDropDown *homeDropDown = [HomeDropDown dropDown];
     homeDropDown.y = title.height;
     homeDropDown.dataSource = self;
+    homeDropDown.delegate = self;
     [self.view addSubview:homeDropDown];
     // 设置控制器在popover中的尺寸
     self.preferredContentSize = CGSizeMake(homeDropDown.width, CGRectGetMaxY(homeDropDown.frame));
 }
 - (IBAction)changeCityClick:(id)sender {
+    [self.popoverView dismissPopoverAnimated:YES];
     CitiesController *contVC = [[CitiesController alloc]init];
     NavigationController *nav = [[NavigationController alloc] initWithRootViewController:contVC];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:nav animated:YES completion:nil];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
     
 }
 #pragma mark -- HomeDropDownDataSource
@@ -48,6 +51,22 @@
 - (NSArray *)homeDropDown:(HomeDropDown *)homeDropDown subTitleDateForRowInMainTable:(NSInteger)row{
     Regions *region = self.regions[row];
     return region.subregions;
+}
+
+#pragma mark -- HomeDropDownDelegate
+- (void)homeDropDown:(HomeDropDown *)homeDropDown didSelectMainTableViewRow:(NSInteger)row{
+    Regions *region = self.regions[row];
+    if (!region.subregions.count) {
+        [MTNotificationCenter postNotificationName:MTRegionDidChangeNotification object:nil userInfo:@{MTSelectRegion : region}];
+    }
+    
+}
+
+- (void)homeDropDown:(HomeDropDown *)homeDropDown didSelectSubTableViewRow:(NSInteger)row withMaintableRow:(NSInteger)mainRow{
+    Regions *region = self.regions[mainRow];;
+    NSString *subRegion = region.subregions[row];
+    [MTNotificationCenter postNotificationName:MTRegionDidChangeNotification object:nil userInfo:@{ MTSelectRegion : region , MTSelectSubregionName: subRegion}];
+ 
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

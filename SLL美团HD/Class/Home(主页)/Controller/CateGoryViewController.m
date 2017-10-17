@@ -12,8 +12,9 @@
 #import "HomeDropDown.h"
 #import "MTCategory.h"
 #import "MetaTool.h"
+#import "Const.h"
 
-@interface CateGoryViewController ()<HomeDropDownDataSource>
+@interface CateGoryViewController ()<HomeDropDownDataSource, HomeDropDownDelegate>
 
 @end
 
@@ -24,6 +25,7 @@
     // Do any additional setup after loading the view.
     HomeDropDown *dropdown = [HomeDropDown dropDown];
     dropdown.dataSource = self;
+    dropdown.delegate = self;
     
     [self.view addSubview:dropdown];
     self.preferredContentSize = dropdown.size;
@@ -53,7 +55,22 @@
     return category.subcategories;
 }
 
+#pragma mark -- HomeDropDownDelegate
+- (void)homeDropDown:(HomeDropDown *)homeDropDown didSelectMainTableViewRow:(NSInteger)row{
+    MTCategory *category = [MetaTool categories][row];
+    if (!category.subcategories.count) {
+        [MTNotificationCenter postNotificationName:CategoryDidChangeNotification object:nil userInfo:@{SelectCategory : category}];
+    }
+    
+}
 
+- (void)homeDropDown:(HomeDropDown *)homeDropDown didSelectSubTableViewRow:(NSInteger)row withMaintableRow:(NSInteger)mainRow{
+    MTCategory *category = [MetaTool categories][mainRow];
+    NSString *subCategory = category.subcategories[row];
+    [MTNotificationCenter postNotificationName:CategoryDidChangeNotification object:nil userInfo:@{ SelectCategory : category , SelectSubCategoryName : subCategory}];
+
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

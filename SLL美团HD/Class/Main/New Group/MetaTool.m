@@ -10,6 +10,7 @@
 #import "MTCategory.h"
 #import "MJExtension.h"
 #import "City.h"
+#import "Sort.h"
 
 @implementation MetaTool
 
@@ -28,6 +29,14 @@ static NSArray *_categories;
        _categories = [MTCategory objectArrayWithFilename:@"categories.plist"];
     }
     return _categories;
+}
+
+static NSArray *_sorts;
++(NSArray*)sorts{
+    if (!_sorts) {
+        _sorts = [Sort objectArrayWithFilename:@"sorts.plist"];
+    }
+    return _sorts;
 }
 
 @end

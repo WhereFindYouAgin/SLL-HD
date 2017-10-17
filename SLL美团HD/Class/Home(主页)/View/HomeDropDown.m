@@ -60,7 +60,6 @@
         if ([self.dataSource respondsToSelector:@selector(homeDropDownh:selectedForRowInMainTable:)]) {
             cell.imageView.highlightedImage = [UIImage imageNamed:[self.dataSource homeDropDownh:self selectedForRowInMainTable:indexPath.row]];
         }
-        
         return cell;
     }else{
         SubCell *cell = [SubCell cellWithTaleView:tableView];
@@ -73,7 +72,16 @@
     if (tableView == self.mainTableView) {
         self.selectRow = indexPath.row;
         [self.subTableView reloadData];
+        if ([self.delegate respondsToSelector: @selector(homeDropDown:didSelectMainTableViewRow:)]) {
+            [self.delegate homeDropDown:self didSelectMainTableViewRow:indexPath.row];
+            }
+    }else{
+        if ([self.delegate respondsToSelector:@selector(homeDropDown:didSelectSubTableViewRow:withMaintableRow:)]) {
+            [self.delegate homeDropDown:self didSelectSubTableViewRow:indexPath.row withMaintableRow:self.selectRow];
+        }
+        
     }
+    
 }
 
 @end

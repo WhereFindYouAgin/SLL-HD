@@ -8,6 +8,16 @@
 
 #import "Const.h"
 
-NSString *const CityDidChangeNotification = @"CityDidChangeNotification";
-NSString *const SelectCityName = @"SelectCityName";
+    NSString *const CategoryDidChangeNotification = @"CategoryDidChangeNotification";
+    NSString *const SelectCategory = @"SelectCategoryName";
+    NSString *const SelectSubCategoryName = @"SelectSubCategoryName";
+    NSString *const MTRegionDidChangeNotification = @"MTRegionDidChangeNotification";
+    NSString *const MTSelectRegion = @"MTSelectRegion";
+    NSString *const MTSelectSubregionName = @"MTSelectSubregionName";
+
+    NSString *const CityDidChangeNotification = @"CityDidChangeNotification";
+    NSString *const SelectCityName = @"SelectCityName";
+
+    NSString *const SortDidChangeNotification = @"SortDidChangeNotification";
+    NSString *const SelectSort = @"SelectSortName";
 

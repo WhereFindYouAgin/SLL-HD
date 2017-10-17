@@ -32,6 +32,23 @@
 - (NSString *)homeDropDownh:(HomeDropDown *)homeDropDown selectedForRowInMainTable:(NSInteger)row;
 
 @end
+
+@protocol HomeDropDownDelegate <NSObject>
+@optional
+
+/**
+ *  点击了主tableView的行
+ *  @param row          行号
+ */
+- (void)homeDropDown:(HomeDropDown *)homeDropDown didSelectMainTableViewRow:(NSInteger)row;
+/**
+ *  点击了右边的分类
+ */
+- (void)homeDropDown:(HomeDropDown *)homeDropDown didSelectSubTableViewRow:(NSInteger)row withMaintableRow:(NSInteger) mainRow;
+
+
+
+@end
 @interface HomeDropDown : UIView
 
 + (instancetype)dropDown;
@@ -46,6 +63,9 @@
  数据源
  */
 @property (nonatomic, weak) id<HomeDropDownDataSource> dataSource;
+
+/** 代理 */
+@property (nonatomic, weak) id<HomeDropDownDelegate> delegate;
 
 
 @end

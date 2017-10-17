@@ -11,5 +11,6 @@
 @interface CityController : UIViewController
 @property (nonatomic, strong) NSArray *regions;
 
+@property (nonatomic, weak)  UIPopoverController *popoverView;
 
 @end

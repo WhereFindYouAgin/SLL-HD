@@ -19,7 +19,18 @@
 #define MTGlobalBg MTColor(230, 230, 230)
 
 #define MTNotificationCenter [NSNotificationCenter defaultCenter]
+extern  NSString *const CategoryDidChangeNotification;
+extern  NSString *const SelectCategory;
+extern  NSString *const SelectSubCategoryName;
+
+extern NSString *const MTRegionDidChangeNotification;
+extern NSString *const MTSelectRegion;
+extern NSString *const MTSelectSubregionName;
+
 extern  NSString *const CityDidChangeNotification;
 extern  NSString *const SelectCityName;
+
+extern  NSString *const SortDidChangeNotification;
+extern  NSString *const SelectSort;
 
 

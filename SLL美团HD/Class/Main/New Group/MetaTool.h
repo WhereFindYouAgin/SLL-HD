@@ -15,4 +15,8 @@
  返还所有的城市
  */
 + (NSArray *)categories;
+/**
+ 返还所有的排序
+ */
++(NSArray*)sorts;
 @end
