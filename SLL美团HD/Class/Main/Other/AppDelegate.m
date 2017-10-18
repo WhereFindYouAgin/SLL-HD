@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "HomeViewController.h"
+#import "HomeCollectionViewController.h"
 #import "NavigationController.h"
 
 @interface AppDelegate ()
@@ -22,7 +23,9 @@
     
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
-    self.window.rootViewController = [[[NavigationController alloc] initWithRootViewController:[HomeViewController alloc]]init];
+    self.window.backgroundColor = [UIColor whiteColor];
+    HomeCollectionViewController *homeCV = [[HomeCollectionViewController alloc]init];
+    self.window.rootViewController = [[NavigationController alloc] initWithRootViewController:homeCV];
     [self.window makeKeyAndVisible];
     return YES;
 }

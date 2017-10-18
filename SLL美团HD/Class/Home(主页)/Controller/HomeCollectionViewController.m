@@ -1,16 +1,16 @@
 //
-//  HomeViewController.m
+//  HomeCollectionViewController.m
 //  SLL美团HD
 //
-//  Created by sll on 2017/10/13.
+//  Created by sll on 2017/10/18.
 //  Copyright © 2017年 sll. All rights reserved.
 //
 
-#import "HomeViewController.h"
-
+#import "HomeCollectionViewController.h"
 #import "UIBarButtonItem+Extension.h"
 #import "UIView+Extension.h"
 #import "HomeTopItem.h"
+#import "DealCell.h"
 #import "Const.h"
 #import "CateGoryViewController.h"
 #import "CityController.h"
@@ -18,13 +18,16 @@
 #import "NavigationController.h"
 #import "City.h"
 #import "Regions.h"
+#import "Deal.h"
 #import "Sort.h"
 #import "MTCategory.h"
 #import "MetaTool.h"
+
+#import "MJExtension.h"
 #import "DPAPI.h"
 
 
-@interface HomeViewController ()<DPRequestDelegate>
+@interface HomeCollectionViewController ()<DPRequestDelegate>
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
 
 @property (nonatomic, weak) UIBarButtonItem *districtItem;
@@ -47,19 +50,39 @@
 @property (nonatomic, strong) Sort *selectSort;
 /** 选择的分类名字 */
 @property (nonatomic, copy) NSString *selectCategoryName;
-
-
+/** 加载的Deals */
+@property (nonatomic, strong) NSMutableArray *deals;
 
 
 @end
 
-@implementation HomeViewController
+@implementation HomeCollectionViewController
 
+static NSString * const reuseIdentifier = @"dealCell";
+
+- (instancetype)init{
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    // cell的大小
+    layout.itemSize = CGSizeMake(305, 305);
+    return [self initWithCollectionViewLayout:layout];
+    
+}
+- (NSMutableArray *)deals{
+    if (!_deals) {
+        _deals = [NSMutableArray array];
+    }
+    return _deals;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"DealCell" bundle:nil ] forCellWithReuseIdentifier:reuseIdentifier];
+    self.collectionView.backgroundColor = MTGlobalBg;
+    
     [self setUpLeftNav];
     [self setupRightNav];
+    
     [MTNotificationCenter addObserver:self selector:@selector(changeCategoryName:) name:CategoryDidChangeNotification object:nil];
     
     [MTNotificationCenter addObserver:self selector:@selector(changeCityName:) name:CityDidChangeNotification object:nil];
@@ -81,14 +104,14 @@
         self.selectCategoryName = subcategoryName;
     }
     if([self.selectCategoryName isEqualToString:@"全部分类"]){
-        self.selectCategoryName = nil;        
+        self.selectCategoryName = nil;
     }
-
+    
     HomeTopItem *cityTopItem = (HomeTopItem *)self.categoryItem.customView;
     [cityTopItem setSubName:subcategoryName];
     [cityTopItem setName:category.name];
     [cityTopItem setIcon:category.icon helighIcon:category.highlighted_icon];
-//    关闭分类
+    //    关闭分类
     [self.sortPopover dismissPopoverAnimated:YES ];
     
     [self loadNewDeals];
@@ -159,14 +182,18 @@
 }
 #pragma mark -- DPAPIDelegate
 - (void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result{
+    NSArray *newDeal = [Deal objectArrayWithKeyValuesArray:result[@"deals"]];
+    [self.deals removeAllObjects];
+    [self.deals addObjectsFromArray:newDeal];
     
-     DLog(@"%@", result);
+    DLog(@"%@", self.deals);
+    [self.collectionView reloadData];
 }
 
 - (void)request:(DPRequest *)request didFailWithError:(NSError *)error{
     
     DLog(@"错误信息%@",error);
-
+    
 }
 
 
@@ -230,7 +257,7 @@
 
 - (void)sortClick
 {
-   SortViewController *sortViewController = [[SortViewController alloc]init];
+    SortViewController *sortViewController = [[SortViewController alloc]init];
     UIPopoverController *sortPopover = [[UIPopoverController alloc] initWithContentViewController:sortViewController];
     [sortPopover presentPopoverFromBarButtonItem:self.sortItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     self.sortPopover = sortPopover;
@@ -239,4 +266,58 @@
     
     [MTNotificationCenter removeObserver:self];
 }
+
+
+#pragma mark <UICollectionViewDataSource>
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+
+    return 1;
+}
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    DLog(@"%ld",self.deals.count);
+    return self.deals.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+     DealCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+    cell.deal = self.deals[indexPath.item];
+    
+    return cell;
+}
+
+#pragma mark <UICollectionViewDelegate>
+
+/*
+// Uncomment this method to specify if the specified item should be highlighted during tracking
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+	return YES;
+}
+*/
+
+/*
+// Uncomment this method to specify if the specified item should be selected
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+*/
+
+/*
+// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
+	return NO;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+	return NO;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+	
+}
+*/
+
 @end
