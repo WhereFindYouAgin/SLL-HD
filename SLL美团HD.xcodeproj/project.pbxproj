@@ -32,6 +32,7 @@
 		5FA81DE31F95E78100DD96A9 /* SortViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA81DE21F95E78100DD96A9 /* SortViewController.m */; };
 		5FB7E9A71F96E21500060A7B /* DPAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB7E9A31F96E21500060A7B /* DPAPI.m */; };
 		5FB7E9A81F96E21500060A7B /* DPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB7E9A61F96E21500060A7B /* DPRequest.m */; };
+		5FB7E9AA1F96E86300060A7B /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB7E9A91F96E86200060A7B /* Foundation+Log.m */; };
 		F9B9EF601F90DB9300A36BA2 /* MTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EF5F1F90DB9300A36BA2 /* MTCategory.m */; };
 		F9B9F00A1F90E45800A36BA2 /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EFF41F90E45600A36BA2 /* MJArgument.m */; };
 		F9B9F00B1F90E45800A36BA2 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EFF61F90E45600A36BA2 /* MJConst.m */; };
@@ -135,6 +136,7 @@
 		5FB7E9A41F96E21500060A7B /* DPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPConstants.h; sourceTree = "<group>"; };
 		5FB7E9A51F96E21500060A7B /* DPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRequest.h; sourceTree = "<group>"; };
 		5FB7E9A61F96E21500060A7B /* DPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRequest.m; sourceTree = "<group>"; };
+		5FB7E9A91F96E86200060A7B /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		F9B9EF5E1F90DB9300A36BA2 /* MTCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTCategory.h; sourceTree = "<group>"; };
 		F9B9EF5F1F90DB9300A36BA2 /* MTCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTCategory.m; sourceTree = "<group>"; };
 		F9B9EFF31F90E45600A36BA2 /* MJArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJArgument.h; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 		5F65AC971F90982500D8E246 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				5FB7E9A91F96E86200060A7B /* Foundation+Log.m */,
 				5F5252CF1F94A04300613FC5 /* UIView+AutoLayout.h */,
 				5F5252CE1F94A04300613FC5 /* UIView+AutoLayout.m */,
 				5F65AC871F90893100D8E246 /* UIBarButtonItem+Extension.h */,
@@ -679,6 +682,7 @@
 				5F5F3C781F54096000C30DF9 /* ViewController.m in Sources */,
 				F9B9EF601F90DB9300A36BA2 /* MTCategory.m in Sources */,
 				5F5252D31F94A52E00613FC5 /* CitySearchResultController.m in Sources */,
+				5FB7E9AA1F96E86300060A7B /* Foundation+Log.m in Sources */,
 				F9B9F0141F90E45800A36BA2 /* NSObject+MJMember.m in Sources */,
 				5F5F3C751F54095300C30DF9 /* AppDelegate.m in Sources */,
 				F9B9F00F1F90E45800A36BA2 /* MJMethod.m in Sources */,

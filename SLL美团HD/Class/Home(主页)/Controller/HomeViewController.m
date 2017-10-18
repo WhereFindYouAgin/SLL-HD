@@ -21,9 +21,10 @@
 #import "Sort.h"
 #import "MTCategory.h"
 #import "MetaTool.h"
+#import "DPAPI.h"
 
 
-@interface HomeViewController ()
+@interface HomeViewController ()<DPRequestDelegate>
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
 
 @property (nonatomic, weak) UIBarButtonItem *districtItem;
@@ -38,12 +39,13 @@
 /** 排序popover */
 @property (nonatomic, strong) UIPopoverController *sortPopover;
 
-@property (nonatomic, copy) NSString *cityName;
-
+/** 选择的城市名字 */
+@property (nonatomic, copy) NSString *selectedCityName;
+/** 选择的区域名字 */
 @property (nonatomic, copy) NSString *selectedRegionName;
-
-
+/** 选择的排序 */
 @property (nonatomic, strong) Sort *selectSort;
+/** 选择的分类名字 */
 @property (nonatomic, copy) NSString *selectCategoryName;
 
 
@@ -69,38 +71,7 @@
 }
 
 #pragma mark -- 处理通知
-- (void)changeCityName:(NSNotification *)notifiction{
-    self.cityName = notifiction.userInfo[SelectCityName];
-    HomeTopItem *cityTopItem = (HomeTopItem *)self.districtItem.customView;
-    [cityTopItem setName:[NSString stringWithFormat:@"%@--全部",self.cityName]];
-}
-
-- (void)changeSortName:(NSNotification *)notification{
-    self.selectSort = notification.userInfo[SelectSort];
-    HomeTopItem *cityTopItem = (HomeTopItem *)self.sortItem.customView;
-    [cityTopItem setSubName:self.selectSort.label];
-    [self.sortPopover dismissPopoverAnimated:YES ];
-
-}
-
-- (void)changeRegionName:(NSNotification *)notification{
-    Regions *region = notification.userInfo[MTSelectRegion];
-    NSString *subregionName = notification.userInfo[MTSelectSubregionName];
-    if (subregionName == nil || [subregionName isEqualToString:@"全部"]) {
-        self.selectedRegionName = region.name;
-    } else {
-        self.selectedRegionName = subregionName;
-    }
-    if ([self.selectedRegionName isEqualToString:@"全部"]) {
-        self.selectedRegionName = nil;
-        subregionName = nil;
-    }
-    HomeTopItem *cityTopItem = (HomeTopItem *)self.districtItem.customView;
-    [cityTopItem setName:[NSString stringWithFormat:@"%@-%@", self.cityName,region.name]];
-    [cityTopItem setSubName:subregionName];
-    [self.regionPopover dismissPopoverAnimated:YES];
-}
-
+//改变分类
 - (void)changeCategoryName:(NSNotification *)notification{
     self.selectCategoryName = notification.userInfo[SelectSubCategoryName];
     MTCategory *category = notification.userInfo[SelectCategory];
@@ -112,8 +83,75 @@
     
 }
 
+//改变城市
+- (void)changeCityName:(NSNotification *)notifiction{
+    self.selectedCityName = notifiction.userInfo[SelectCityName];
+    HomeTopItem *cityTopItem = (HomeTopItem *)self.districtItem.customView;
+    [cityTopItem setName:[NSString stringWithFormat:@"%@--全部",self.selectedCityName]];
+}
+
+//改变区域
+- (void)changeRegionName:(NSNotification *)notification{
+    Regions *region = notification.userInfo[MTSelectRegion];
+    NSString *subregionName = notification.userInfo[MTSelectSubregionName];
+    if (subregionName == nil || [subregionName isEqualToString:@"全部"]) {
+        self.selectedRegionName = region.name;
+    } else {
+        self.selectedRegionName = subregionName;
+    }
+    if ([self.selectedRegionName isEqualToString:@"全部"]) {
+        self.selectedRegionName = nil;
+    }
+    HomeTopItem *cityTopItem = (HomeTopItem *)self.districtItem.customView;
+    [cityTopItem setName:[NSString stringWithFormat:@"%@-%@", self.selectedCityName,region.name]];
+    [cityTopItem setSubName:subregionName];
+    [self.regionPopover dismissPopoverAnimated:YES];
+}
+
+//改变排序
+- (void)changeSortName:(NSNotification *)notification{
+    self.selectSort = notification.userInfo[SelectSort];
+    HomeTopItem *cityTopItem = (HomeTopItem *)self.sortItem.customView;
+    [cityTopItem setSubName:self.selectSort.label];
+    [self.sortPopover dismissPopoverAnimated:YES ];
+}
+
+#pragma mark -- 与服务器交互
+- (void)laodNewDeals{
+    DPAPI *api = [[DPAPI alloc] init];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //城市
+    params[@"city"] = self.selectedCityName;
+    //每页条数
+    params[@"limit"] = @5;
+    //分类
+    if (self.selectCategoryName) {
+        params[@"category"] = self.selectCategoryName;
+    }
+    //区域
+    if (self.selectedRegionName) {
+        params[@"region"] = self.selectedRegionName;
+    }
+    //排序
+    if (self.selectSort) {
+        params[@"sort"] = @(self.selectSort.value);
+    }
+    [api requestWithURL:@"" params:params delegate:self];
+}
+#pragma mark -- DPAPIDelegate
+- (void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result{
+    
+    DLog(@"结果 =%@",result);
+}
+
+- (void)request:(DPRequest *)request didFailWithError:(NSError *)error{
+    
+    DLog(@"错误信息%@",error);
+
+}
 
 
+#pragma mark  -- 设置导航栏
 - (void)setUpLeftNav
 {
     //1 , Logo
@@ -162,7 +200,7 @@
 
 - (void)districtClick
 {
-    City *city = [[[MetaTool cities] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name = %@", self.cityName]] firstObject] ;
+    City *city = [[[MetaTool cities] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name = %@", self.selectedCityName]] firstObject];
     CityController *contVC = [[CityController alloc]init];
     contVC.regions = city.regions;
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:contVC];
