@@ -112,7 +112,7 @@ static NSString * const reuseIdentifier = @"dealCell";
     [cityTopItem setName:category.name];
     [cityTopItem setIcon:category.icon helighIcon:category.highlighted_icon];
     //    关闭分类
-    [self.sortPopover dismissPopoverAnimated:YES ];
+    [self.categoryPopover dismissPopoverAnimated:YES ];
     
     [self loadNewDeals];
 }
