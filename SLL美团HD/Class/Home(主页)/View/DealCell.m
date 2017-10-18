@@ -34,6 +34,13 @@
     self.titleLabel.text = deal.title;
     self.descLabel.text = deal.desc;
     self.currentPriceLabel.text = [NSString stringWithFormat:@"¥ %@", deal.current_price];
+    NSInteger dotLoc = [self.currentPriceLabel.text rangeOfString:@"."].location;
+    if (dotLoc != NSNotFound) {
+        if (self.currentPriceLabel.text.length - dotLoc > 3) {
+            self.currentPriceLabel.text = [self.currentPriceLabel.text substringToIndex:dotLoc + 3];
+        }
+    }
+    
     self.listPriceLabel.text = [NSString stringWithFormat:@"¥ %@", deal.list_price];
     self.purchaseCountLabel.text = [NSString stringWithFormat:@"已售%d", deal.purchase_count];
     

@@ -166,11 +166,11 @@ static NSString * const reuseIdentifier = @"dealCell";
     //每页条数
     params[@"limit"] = @5;
     //分类
-    if (self.selectCategoryName) {
+    if (self.selectCategoryName > 0) {
         params[@"category"] = self.selectCategoryName;
     }
     //区域
-    if (self.selectedRegionName) {
+    if (self.selectedRegionName.length > 0) {
         params[@"region"] = self.selectedRegionName;
     }
     //排序
@@ -277,7 +277,6 @@ static NSString * const reuseIdentifier = @"dealCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    DLog(@"%ld",self.deals.count);
     return self.deals.count;
 }
 
