@@ -338,9 +338,11 @@
 		5F1ADAE91F90809800B8545C /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				5F896F7E1F98916900A2AEF1 /* Collect(收藏) */,
+				5F896F7D1F98916600A2AEF1 /* Recent(最近) */,
 				5F9CF66B1F985151005AC883 /* Search(搜索) */,
 				5F1ADAEA1F90810700B8545C /* Home(主页) */,
-				5F1ADAEB1F90810A00B8545C /* Main */,
+				5F1ADAEB1F90810A00B8545C /* Main(主要) */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -355,7 +357,7 @@
 			path = "Home(主页)";
 			sourceTree = "<group>";
 		};
-		5F1ADAEB1F90810A00B8545C /* Main */ = {
+		5F1ADAEB1F90810A00B8545C /* Main(主要) */ = {
 			isa = PBXGroup;
 			children = (
 				5FA81DDA1F95A8A800DD96A9 /* Tool */,
@@ -364,7 +366,7 @@
 				5F65AC961F90982300D8E246 /* Controller */,
 				5F65AC951F90982100D8E246 /* Other */,
 			);
-			path = Main;
+			path = "Main(主要)";
 			sourceTree = "<group>";
 		};
 		5F5F3C641F54095200C30DF9 = {
@@ -550,6 +552,20 @@
 				5F896F7A1F988E2F00A2AEF1 /* AwesomeMenuItem.m */,
 			);
 			path = AwesomeMenu;
+			sourceTree = "<group>";
+		};
+		5F896F7D1F98916600A2AEF1 /* Recent(最近) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Recent(最近)";
+			sourceTree = "<group>";
+		};
+		5F896F7E1F98916900A2AEF1 /* Collect(收藏) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Collect(收藏)";
 			sourceTree = "<group>";
 		};
 		5F9CF6431F984085005AC883 /* MJRefresh */ = {

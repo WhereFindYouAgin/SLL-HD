@@ -23,12 +23,14 @@
 #import "MTCategory.h"
 #import "MetaTool.h"
 
+#import "UIView+AutoLayout.h"
+#import "AwesomeMenu.h"
 #import "MJRefresh.h"
 
 
 
 
-@interface HomeCollectionViewController ()
+@interface HomeCollectionViewController ()<AwesomeMenuDelegate>
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
 
 @property (nonatomic, weak) UIBarButtonItem *districtItem;
@@ -73,7 +75,37 @@
     
     [MTNotificationCenter addObserver:self selector:@selector(changeRegionName:) name:MTRegionDidChangeNotification object:nil];
     
-    [MTNotificationCenter addObserver:self selector:@selector(changeSortName:) name:SortDidChangeNotification object:nil];   
+    [MTNotificationCenter addObserver:self selector:@selector(changeSortName:) name:SortDidChangeNotification object:nil];
+    [self setUpAweSomemenu];
+}
+#pragma mark -- setUpAweSomemenu
+- (void)setUpAweSomemenu{
+    // 1.中间的item
+    AwesomeMenuItem *startItem = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"icon_pathMenu_background_highlighted"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_mainMine_normal"] highlightedContentImage:nil];
+    
+    // 2.周边的item
+    AwesomeMenuItem *item0 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"bg_pathMenu_black_normal"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_normal"] highlightedContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_highlighted"]];
+    AwesomeMenuItem *item1 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"bg_pathMenu_black_normal"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_normal"] highlightedContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_highlighted"]];
+    AwesomeMenuItem *item2 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"bg_pathMenu_black_normal"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_normal"] highlightedContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_highlighted"]];
+    AwesomeMenuItem *item3 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"bg_pathMenu_black_normal"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_normal"] highlightedContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_highlighted"]];
+    
+    NSArray *items = @[item0, item1, item2, item3];
+    AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:CGRectZero startItem:startItem optionMenus:items];
+    menu.alpha = 0.5;
+    // 设置菜单的活动范围
+    menu.menuWholeAngle = M_PI_2;
+    // 设置开始按钮的位置
+    menu.startPoint = CGPointMake(50, 150);
+    // 设置代理
+    menu.delegate = self;
+    // 不要旋转中间按钮
+    menu.rotateAddButton = NO;
+    [self.view addSubview:menu];
+    
+    // 设置菜单永远在左下角
+    [menu autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
+    [menu autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [menu autoSetDimensionsToSize:CGSizeMake(200, 200)];
 }
 
 #pragma mark -- 处理通知
@@ -233,41 +265,27 @@
     [MTNotificationCenter removeObserver:self];
 }
 
+#pragma mark --
+- (void)awesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx{
+    
+}
+
+
+- (void)awesomeMenuWillAnimateOpen:(AwesomeMenu *)menu{
+    menu.contentImage = [UIImage imageNamed:@"icon_pathMenu_cross_normal"];
+    menu.alpha = 1.0;
+}
+- (void)awesomeMenuWillAnimateClose:(AwesomeMenu *)menu{
+    menu.contentImage = [UIImage imageNamed:@"icon_pathMenu_mainMine_normal"];
+    menu.alpha = 0.5;
+}
+
 #pragma mark -- 屏幕发生改变
 
 
 
 
 
-#pragma mark <UICollectionViewDelegate>
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
 
 @end
