@@ -9,6 +9,7 @@
 #import "HomeCollectionViewController.h"
 #import "UIBarButtonItem+Extension.h"
 #import "UIView+Extension.h"
+#import "UIView+AutoLayout.h"
 #import "HomeTopItem.h"
 #import "DealCell.h"
 #import "Const.h"
@@ -23,7 +24,9 @@
 #import "MTCategory.h"
 #import "MetaTool.h"
 
+#import "MBProgressHUD+MJ.h"
 #import "MJExtension.h"
+#import "MJRefresh.h"
 #import "DPAPI.h"
 
 
@@ -52,6 +55,15 @@
 @property (nonatomic, copy) NSString *selectCategoryName;
 /** 加载的Deals */
 @property (nonatomic, strong) NSMutableArray *deals;
+/** 加载的页码 */
+@property (nonatomic, assign) int currentPage;
+/** 最后的请求 */
+@property (nonatomic, weak) DPRequest *lastRequest ;
+/** 请求结果总数 */
+@property (nonatomic, assign) int totalCount;
+
+/** 没有数据显示 */
+@property (nonatomic, weak) UIImageView *noDataView;
 
 
 @end
@@ -67,6 +79,16 @@ static NSString * const reuseIdentifier = @"dealCell";
     layout.itemSize = CGSizeMake(305, 305);
     return [self initWithCollectionViewLayout:layout];
     
+}
+
+- (UIImageView *)noDataView{
+    if (!_noDataView) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_deals_empty"]];
+        [self.view addSubview:imageView];
+        [imageView autoCenterInSuperview];
+        _noDataView = imageView;
+    }
+    return _noDataView;
 }
 - (NSMutableArray *)deals{
     if (!_deals) {
@@ -90,6 +112,10 @@ static NSString * const reuseIdentifier = @"dealCell";
     [MTNotificationCenter addObserver:self selector:@selector(changeRegionName:) name:MTRegionDidChangeNotification object:nil];
     
     [MTNotificationCenter addObserver:self selector:@selector(changeSortName:) name:SortDidChangeNotification object:nil];
+    self.collectionView .alwaysBounceVertical = YES;
+    [self.collectionView addFooterWithTarget:self action:@selector(loadMoerDeals)];
+    [self.collectionView addHeaderWithTarget:self action:@selector(loadNewDeals)];
+
     
 }
 
@@ -113,7 +139,8 @@ static NSString * const reuseIdentifier = @"dealCell";
     [cityTopItem setIcon:category.icon helighIcon:category.highlighted_icon];
     //    关闭分类
     [self.categoryPopover dismissPopoverAnimated:YES ];
-    
+    [self.collectionView headerBeginRefreshing];
+
     [self loadNewDeals];
 }
 
@@ -157,8 +184,9 @@ static NSString * const reuseIdentifier = @"dealCell";
     [self loadNewDeals];
 }
 
+
 #pragma mark -- 与服务器交互
-- (void)loadNewDeals{
+- (void)loadDeals{
     DPAPI *api = [[DPAPI alloc] init];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //城市
@@ -177,23 +205,49 @@ static NSString * const reuseIdentifier = @"dealCell";
     if (self.selectSort) {
         params[@"sort"] = @(self.selectSort.value);
     }
-    [api requestWithURL:@"v1/deal/find_deals" params:params delegate:self];
+    params[@"page"]  = @(self.currentPage);
+    self.lastRequest = [api requestWithURL:@"v1/deal/find_deals" params:params delegate:self];
     NSLog(@"请求参数 = %@",params);
+    
+}
+
+- (void)loadMoerDeals{
+    self.currentPage ++;
+    
+    [self loadDeals];
+}
+
+- (void)loadNewDeals{
+    self.currentPage = 1;
+    [self loadDeals];
 }
 #pragma mark -- DPAPIDelegate
 - (void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result{
+    if (request != self.lastRequest) return;
+    self.totalCount = [result[@"total_count"] intValue];;
     NSArray *newDeal = [Deal objectArrayWithKeyValuesArray:result[@"deals"]];
-    [self.deals removeAllObjects];
+    if (_currentPage == 1 ) {
+        [self.deals removeAllObjects];
+    }
     [self.deals addObjectsFromArray:newDeal];
     
-    DLog(@"%@", self.deals);
     [self.collectionView reloadData];
+    [self.collectionView footerEndRefreshing];
+    [self.collectionView headerEndRefreshing];
 }
 
 - (void)request:(DPRequest *)request didFailWithError:(NSError *)error{
     
-    DLog(@"错误信息%@",error);
+    if (request != self.lastRequest) return;
+    [MBProgressHUD showError:@"网络加载错误" toView:self.view];
+    [self.collectionView headerEndRefreshing];
+    [self.collectionView footerEndRefreshing];
     
+    // 3.如果是上拉加载失败了
+    if (self.currentPage > 1) {
+        self.currentPage--;
+    }
+    DLog(@"错误信息%@",error);
 }
 
 
@@ -266,12 +320,25 @@ static NSString * const reuseIdentifier = @"dealCell";
     
     [MTNotificationCenter removeObserver:self];
 }
+#pragma mark -- 屏幕发生改变
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    // 根据屏幕宽度决定列数
+    int cols = (size.width == 1024? 3 : 2);
+    UICollectionViewFlowLayout *layOut = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    CGFloat inset = (size.width - layOut.itemSize.width * cols) / (cols + 1);
+    layOut.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
+    layOut.minimumLineSpacing = inset;
+    
+}
 
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-
+    [self viewWillTransitionToSize:CGSizeMake(collectionView.width, 0) withTransitionCoordinator:nil];
+    self.collectionView.footerHidden = (self.deals.count == self.totalCount);
+    self.noDataView.hidden = !(self.totalCount == 0);
     return 1;
 }
 

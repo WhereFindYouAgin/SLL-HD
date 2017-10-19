@@ -43,6 +43,11 @@
     
     self.listPriceLabel.text = [NSString stringWithFormat:@"¥ %@", deal.list_price];
     self.purchaseCountLabel.text = [NSString stringWithFormat:@"已售%d", deal.purchase_count];
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd";
+    NSString *nowDate = [fmt stringFromDate:[NSDate date]];
+    // 隐藏: 发布日期 < 今天
+    self.dealNewImageView.hidden = ([deal.publish_date compare:nowDate] == NSOrderedAscending);
     
 }
 - (void)drawRect:(CGRect)rect{

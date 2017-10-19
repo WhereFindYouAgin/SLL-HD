@@ -54,7 +54,7 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mko-t8-8cP" userLabel="原价">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mko-t8-8cP" userLabel="原价" customClass="CenterLineLabel">
                                 <rect key="frame" x="28" y="94" width="24.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Tt1-L9-hL5"/>
@@ -119,7 +119,7 @@
                 <outlet property="purchaseCountLabel" destination="PnG-7f-B0n" id="kPX-rI-WuX"/>
                 <outlet property="titleLabel" destination="SMY-zi-jWP" id="vDu-l1-MlS"/>
             </connections>
-            <point key="canvasLocation" x="-138" y="202"/>
+            <point key="canvasLocation" x="-300" y="213"/>
         </collectionViewCell>
     </objects>
     <resources>
