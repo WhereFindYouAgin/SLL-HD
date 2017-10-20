@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ai1-Qg-0q9">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="768"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="400" id="ni0-YP-0iR"/>
+                    </constraints>
+                </view>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpd-01-kSV">
+                    <rect key="frame" x="415" y="0.0" width="609" height="768"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </webView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ai1-Qg-0q9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2De-pt-Tgt"/>
+                <constraint firstItem="mpd-01-kSV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3qo-7u-N3c"/>
+                <constraint firstAttribute="bottom" secondItem="mpd-01-kSV" secondAttribute="bottom" id="63F-0n-p6U"/>
+                <constraint firstItem="Ai1-Qg-0q9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RBT-EG-Vdt"/>
+                <constraint firstAttribute="bottom" secondItem="Ai1-Qg-0q9" secondAttribute="bottom" id="fYH-Wq-568"/>
+                <constraint firstAttribute="trailing" secondItem="mpd-01-kSV" secondAttribute="trailing" id="lkx-aB-QDA"/>
+                <constraint firstItem="mpd-01-kSV" firstAttribute="leading" secondItem="Ai1-Qg-0q9" secondAttribute="trailing" constant="15" id="pWB-uM-YIR"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

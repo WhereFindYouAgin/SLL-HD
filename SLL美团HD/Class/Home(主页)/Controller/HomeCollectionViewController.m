@@ -17,6 +17,7 @@
 #import "SortViewController.h"
 #import "NavigationController.h"
 #import "SearchViewController.h"
+#import "CollectViewController.h"
 #import "City.h"
 #import "Regions.h"
 #import "Sort.h"
@@ -265,9 +266,30 @@
     [MTNotificationCenter removeObserver:self];
 }
 
-#pragma mark --
+#pragma mark -- awesomeMenu Delegate
 - (void)awesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx{
-    
+    switch (idx) {
+        case 0:{
+            CollectViewController *collectViewController = [[CollectViewController alloc] init];
+            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:collectViewController];
+            [self presentViewController:nav animated:YES completion:nil];
+            break;
+        }
+        case 1:{
+            
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+        case 3:{
+            
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 
@@ -280,7 +302,6 @@
     menu.alpha = 0.5;
 }
 
-#pragma mark -- 屏幕发生改变
 
 
 

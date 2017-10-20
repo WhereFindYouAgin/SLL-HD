@@ -13,6 +13,7 @@
 #import "DealCell.h"
 #import "Deal.h"
 
+#import "DetailViewController.h"
 #import "Const.h"
 #import "MBProgressHUD+MJ.h"
 #import "MJExtension.h"
@@ -94,6 +95,7 @@ static NSString * const reuseIdentifier = @"dealCell";
     self.currentPage = 1;
     [self loadDeals];
 }
+#pragma mark -- 屏幕发生改变
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     // 根据屏幕宽度决定列数
@@ -154,6 +156,11 @@ static NSString * const reuseIdentifier = @"dealCell";
     cell.deal = self.deals[indexPath.item];
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self presentViewController:[[DetailViewController alloc]init] animated:YES completion:nil];
 }
 
 @end

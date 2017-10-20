@@ -27,6 +27,10 @@
 		5F65ACA81F90A10600D8E246 /* CateGoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F65ACA71F90A10600D8E246 /* CateGoryViewController.m */; };
 		5F896F7B1F988E3000A2AEF1 /* AwesomeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F896F781F988E2F00A2AEF1 /* AwesomeMenu.m */; };
 		5F896F7C1F988E3000A2AEF1 /* AwesomeMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F896F7A1F988E2F00A2AEF1 /* AwesomeMenuItem.m */; };
+		5F99062F1F9999F700463C57 /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F99062E1F9999F700463C57 /* CollectViewController.m */; };
+		5F9906321F999CCE00463C57 /* RecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F9906311F999CCE00463C57 /* RecentViewController.m */; };
+		5F9906371F99D76800463C57 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F9906351F99D76800463C57 /* DetailViewController.m */; };
+		5F9906381F99D76800463C57 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9906361F99D76800463C57 /* DetailViewController.xib */; };
 		5F9CF6421F983A39005AC883 /* CenterLineLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CF6411F983A39005AC883 /* CenterLineLabel.m */; };
 		5F9CF6541F984085005AC883 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F9CF6441F984085005AC883 /* MJRefresh.bundle */; };
 		5F9CF6551F984085005AC883 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CF6471F984085005AC883 /* MJRefreshBaseView.m */; };
@@ -161,6 +165,13 @@
 		5F896F781F988E2F00A2AEF1 /* AwesomeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeMenu.m; sourceTree = "<group>"; };
 		5F896F791F988E2F00A2AEF1 /* AwesomeMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeMenuItem.h; sourceTree = "<group>"; };
 		5F896F7A1F988E2F00A2AEF1 /* AwesomeMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeMenuItem.m; sourceTree = "<group>"; };
+		5F99062D1F9999F700463C57 /* CollectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectViewController.h; sourceTree = "<group>"; };
+		5F99062E1F9999F700463C57 /* CollectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectViewController.m; sourceTree = "<group>"; };
+		5F9906301F999CCE00463C57 /* RecentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentViewController.h; sourceTree = "<group>"; };
+		5F9906311F999CCE00463C57 /* RecentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentViewController.m; sourceTree = "<group>"; };
+		5F9906341F99D76800463C57 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		5F9906351F99D76800463C57 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		5F9906361F99D76800463C57 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		5F9CF6401F983A39005AC883 /* CenterLineLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CenterLineLabel.h; sourceTree = "<group>"; };
 		5F9CF6411F983A39005AC883 /* CenterLineLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CenterLineLabel.m; sourceTree = "<group>"; };
 		5F9CF6441F984085005AC883 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
@@ -338,6 +349,7 @@
 		5F1ADAE91F90809800B8545C /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				5F9906331F99D74500463C57 /* Detail(详情) */,
 				5F896F7E1F98916900A2AEF1 /* Collect(收藏) */,
 				5F896F7D1F98916600A2AEF1 /* Recent(最近) */,
 				5F9CF66B1F985151005AC883 /* Search(搜索) */,
@@ -557,6 +569,8 @@
 		5F896F7D1F98916600A2AEF1 /* Recent(最近) */ = {
 			isa = PBXGroup;
 			children = (
+				5F9906301F999CCE00463C57 /* RecentViewController.h */,
+				5F9906311F999CCE00463C57 /* RecentViewController.m */,
 			);
 			path = "Recent(最近)";
 			sourceTree = "<group>";
@@ -564,8 +578,20 @@
 		5F896F7E1F98916900A2AEF1 /* Collect(收藏) */ = {
 			isa = PBXGroup;
 			children = (
+				5F99062D1F9999F700463C57 /* CollectViewController.h */,
+				5F99062E1F9999F700463C57 /* CollectViewController.m */,
 			);
 			path = "Collect(收藏)";
+			sourceTree = "<group>";
+		};
+		5F9906331F99D74500463C57 /* Detail(详情) */ = {
+			isa = PBXGroup;
+			children = (
+				5F9906341F99D76800463C57 /* DetailViewController.h */,
+				5F9906351F99D76800463C57 /* DetailViewController.m */,
+				5F9906361F99D76800463C57 /* DetailViewController.xib */,
+			);
+			path = "Detail(详情)";
 			sourceTree = "<group>";
 		};
 		5F9CF6431F984085005AC883 /* MJRefresh */ = {
@@ -879,6 +905,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F65ACA21F909C8800D8E246 /* HomeDropDown.xib in Resources */,
+				5F9906381F99D76800463C57 /* DetailViewController.xib in Resources */,
 				F9B9F01B1F90E66600A36BA2 /* cities.plist in Resources */,
 				F9EA32B41F91ECEA004CE4E4 /* CitiesController.xib in Resources */,
 				F9B9F01C1F90E66600A36BA2 /* cityGroups.plist in Resources */,
@@ -925,6 +952,7 @@
 				5F9CF66A1F9850E0005AC883 /* MBProgressHUD.m in Sources */,
 				5F65AC891F90893100D8E246 /* UIBarButtonItem+Extension.m in Sources */,
 				F9B9F0201F90E86800A36BA2 /* MainCell.m in Sources */,
+				5F9906371F99D76800463C57 /* DetailViewController.m in Sources */,
 				5FB7E9A81F96E21500060A7B /* DPRequest.m in Sources */,
 				F9B9F00E1F90E45800A36BA2 /* MJMember.m in Sources */,
 				5FB7E9B41F972CA300060A7B /* DealCell.m in Sources */,
@@ -937,6 +965,7 @@
 				5F65ACA81F90A10600D8E246 /* CateGoryViewController.m in Sources */,
 				5FB7E9D81F97349200060A7B /* MKAnnotationView+WebCache.m in Sources */,
 				5F65AC921F908F9600D8E246 /* HomeTopItem.m in Sources */,
+				5F9906321F999CCE00463C57 /* RecentViewController.m in Sources */,
 				5F65ACA01F909C7900D8E246 /* HomeDropDown.m in Sources */,
 				F9EA32CF1F91F4CE004CE4E4 /* MASConstraintMaker.m in Sources */,
 				F9EA32D31F91F4CE004CE4E4 /* NSArray+MASAdditions.m in Sources */,
@@ -975,6 +1004,7 @@
 				5FB7E9DD1F97349200060A7B /* SDWebImageDownloader.m in Sources */,
 				5F9CF65B1F984085005AC883 /* UIView+MJExtension.m in Sources */,
 				5FB7E9E41F97349200060A7B /* UIImage+WebP.m in Sources */,
+				5F99062F1F9999F700463C57 /* CollectViewController.m in Sources */,
 				F9EA32D81F91FBF0004CE4E4 /* CityGroup.m in Sources */,
 				5FB7E9DA1F97349200060A7B /* SDImageCache.m in Sources */,
 				5F9CF6561F984085005AC883 /* MJRefreshConst.m in Sources */,
