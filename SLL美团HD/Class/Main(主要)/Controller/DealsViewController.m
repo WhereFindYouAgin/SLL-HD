@@ -159,8 +159,9 @@ static NSString * const reuseIdentifier = @"dealCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [self presentViewController:[[DetailViewController alloc]init] animated:YES completion:nil];
+    DetailViewController *detailVC = [[DetailViewController alloc]init];
+    detailVC.deal = self.deals[indexPath.item];
+    [self presentViewController:detailVC animated:YES completion:nil];
 }
 
 @end
