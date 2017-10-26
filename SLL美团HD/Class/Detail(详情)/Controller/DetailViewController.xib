@@ -11,7 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController">
             <connections>
+                <outlet property="collectBtn" destination="z8Z-1d-rzZ" id="4Oh-yJ-XM0"/>
+                <outlet property="descLabel" destination="9I4-un-FzL" id="hr0-vi-YPK"/>
+                <outlet property="leftTimeBtn" destination="ROL-xf-5Kg" id="Y4K-Qm-dQa"/>
                 <outlet property="loadingView" destination="1JN-3k-kPK" id="BQc-D6-70R"/>
+                <outlet property="refundableAnyTimeButton" destination="Xs6-4I-Vpb" id="hBD-fE-fRa"/>
+                <outlet property="refundableExpireButton" destination="6Jp-YH-c6W" id="Vd4-rg-Kpn"/>
+                <outlet property="titleLabel" destination="erX-l1-pyb" id="bbH-dP-fdE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="mpd-01-kSV" id="Kr2-Qn-YQB"/>
             </connections>
@@ -38,6 +44,9 @@
                                     </constraints>
                                     <state key="normal" image="icon_back"/>
                                     <state key="highlighted" image="icon_back_highlighted"/>
+                                    <connections>
+                                        <action selector="back:" destination="-1" eventType="touchUpInside" id="0KH-IM-JJ0"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详情页面" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yd1-I6-ZB4">
                                     <rect key="frame" x="0.0" y="20" width="400" height="44"/>
@@ -94,6 +103,9 @@
                                     <state key="normal" title="立即购买" backgroundImage="bg_deal_purchaseButton">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="buyNow:" destination="-1" eventType="touchUpInside" id="Zge-3f-jqi"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8Z-1d-rzZ" userLabel="收藏">
                                     <rect key="frame" x="188" y="250" width="60" height="60"/>
@@ -116,35 +128,42 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xr-CN-CLt">
                                     <rect key="frame" x="0.0" y="320" width="370" height="80"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xs6-4I-Vpb" userLabel="支持过期退">
+                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xs6-4I-Vpb">
                                             <rect key="frame" x="0.0" y="0.0" width="185" height="40"/>
                                             <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="支持过期退" image="icon_order_unrefundable"/>
+                                            <state key="normal" title="支持随时退" image="icon_order_unrefundable">
+                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
                                             <state key="selected" image="icon_order_refundable"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROL-xf-5Kg" userLabel="支持过期退">
+                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROL-xf-5Kg" userLabel="支持过期退">
                                             <rect key="frame" x="185" y="0.0" width="185" height="40"/>
                                             <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="支持过期退" image="icon_order_unrefundable"/>
+                                            <state key="normal" title="支持过期退" image="icon_order_unrefundable">
+                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
                                             <state key="selected" image="icon_order_refundable"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxK-SD-QfY" userLabel="支持到颠覆">
+                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxK-SD-QfY" userLabel="支持到颠覆">
                                             <rect key="frame" x="0.0" y="40" width="185" height="40"/>
                                             <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="支持过期退" image="icon_order_unrefundable"/>
+                                            <state key="normal" title="支持过期退" image="icon_order_unrefundable">
+                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Jp-YH-c6W" userLabel="支持所有">
+                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Jp-YH-c6W" userLabel="支持所有">
                                             <rect key="frame" x="185" y="40" width="185" height="40"/>
                                             <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="支持过期退" image="icon_order_unrefundable"/>
+                                            <state key="normal" title="支持过期退" image="icon_order_unrefundable">
+                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
                                             <state key="selected" image="icon_order_refundable"/>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.94557837040000003" green="0.75582729739999999" blue="0.43092740369999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="6Jp-YH-c6W" secondAttribute="bottom" id="3eQ-4x-yeu"/>
                                         <constraint firstItem="pxK-SD-QfY" firstAttribute="top" secondItem="Xs6-4I-Vpb" secondAttribute="bottom" id="EFp-IE-xCV"/>
@@ -229,6 +248,7 @@
                 <constraint firstAttribute="trailing" secondItem="mpd-01-kSV" secondAttribute="trailing" id="lkx-aB-QDA"/>
                 <constraint firstItem="mpd-01-kSV" firstAttribute="leading" secondItem="Ai1-Qg-0q9" secondAttribute="trailing" constant="15" id="pWB-uM-YIR"/>
             </constraints>
+            <point key="canvasLocation" x="-326" y="-48"/>
         </view>
     </objects>
     <resources>
