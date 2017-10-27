@@ -38,7 +38,7 @@
     self.view.backgroundColor = MTGlobalBg;    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.deal.deal_h5_url]];
     [self.webView loadRequest:request];
-    
+    NSLog(@"添加了一句备注");
     //设置基本信息
     self.titleLabel.text = self.deal.title;
     self.descLabel.text = self.deal.desc;
