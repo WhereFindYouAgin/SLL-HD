@@ -10,8 +10,10 @@
 #import "Deal.h"
 #import "Const.h"
 #import "MTRestrictions.h"
+#import "DealTool.h"
 
 #import "MJExtension.h"
+#import "MBProgressHUD.h"
 #import "DPAPI.h"
 
 @interface DetailViewController ()<UIWebViewDelegate, DPRequestDelegate>
@@ -32,6 +34,7 @@
 @implementation DetailViewController
 - (IBAction)buyNow:(id)sender {
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,9 +66,20 @@
     [api requestWithURL:@"v1/deal/get_single_deal" params:params delegate:self];
     
     // 设置收藏状态
+    self.collectBtn.selected = [DealTool isCollected:self.deal];
     
 }
 
+- (IBAction)collect:(id)sender {
+    if (self.collectBtn.isSelected) {
+        [DealTool removeCollectDeal:self.deal];
+    }else{
+        [DealTool addCollectDeal:self.deal];
+    }
+    self.collectBtn.selected = !self.collectBtn.isSelected;
+}
+
+#pragma mark -- UIWebViewDelegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [self.loadingView stopAnimating];
 }
@@ -73,6 +87,9 @@
     [self.loadingView stopAnimating];
 
 }
+
+
+
 
 
 

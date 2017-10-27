@@ -14,5 +14,5 @@
     
     return @{@"desc": @"description"};
 }
-
+MJCodingImplementation;
 @end

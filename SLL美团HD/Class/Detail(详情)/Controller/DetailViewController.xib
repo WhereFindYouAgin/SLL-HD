@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -115,6 +115,9 @@
                                     </constraints>
                                     <state key="normal" image="icon_collect"/>
                                     <state key="selected" image="icon_collect_highlighted"/>
+                                    <connections>
+                                        <action selector="collect:" destination="-1" eventType="touchUpInside" id="2Pf-3P-XcD"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRd-tD-HBw" userLabel="分享">
                                     <rect key="frame" x="286" y="250" width="60" height="60"/>
