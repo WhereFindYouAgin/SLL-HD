@@ -33,4 +33,7 @@ extern  NSString *const SelectCityName;
 extern  NSString *const SortDidChangeNotification;
 extern  NSString *const SelectSort;
 
+extern  NSString *const CollectStateDidChangeNotification;
+extern  NSString *const IsCollectKey;
+extern  NSString *const CollectDealKey;
 

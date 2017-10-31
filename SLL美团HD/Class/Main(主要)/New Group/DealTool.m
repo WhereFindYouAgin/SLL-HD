@@ -26,6 +26,19 @@ static FMDatabase *_db;
     [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_recent_deal(id integer PRIMARY KEY, deal blob NOT NULL, deal_id text NOT NULL);"];
 }
 
++(NSArray*)collectDeals:(int)page{
+    int size = 20;
+    int pos = (page - 1) * size;
+    FMResultSet *set = [_db executeQueryWithFormat:@"SELECT * FROM t_collect_deal ORDER BY id DESC LIMIT %d,%d;", pos, size];
+    NSMutableArray *deals = [NSMutableArray array];
+    while (set.next) {
+        Deal *deal = [NSKeyedUnarchiver unarchiveObjectWithData:[set objectForColumnName:@"deal"]];
+        [deals addObject:deal];
+    }
+    return deals;
+    
+}
+
 + (void)addCollectDeal:(Deal *)deal{
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:deal];
     [_db executeUpdateWithFormat:@"INSERT INTO t_collect_deal(deal, deal_id) VALUES(%@, %@);", data, deal.deal_id];
@@ -36,9 +49,15 @@ static FMDatabase *_db;
 }
 
 + (BOOL)isCollected:(Deal *)deal{
+    FMResultSet *set = [_db executeQueryWithFormat:@"SELECT count(*) AS deal_count FROM t_collect_deal WHERE deal_id = %@;", deal.deal_id];
+    [set next];
+    return  [set intForColumn:@"deal_count"] == 1;
+}
++ (int)collectDealsCount{
     FMResultSet *set = [_db executeQueryWithFormat:@"SELECT count(*) AS deal_count FROM t_collect_deal;"];
     [set next];
     return [set intForColumn:@"deal_count"];
+    
 }
 
 @end

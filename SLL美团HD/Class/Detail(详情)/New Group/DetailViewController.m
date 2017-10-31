@@ -13,7 +13,7 @@
 #import "DealTool.h"
 
 #import "MJExtension.h"
-#import "MBProgressHUD.h"
+#import "MBProgressHUD+MJ.h"
 #import "DPAPI.h"
 
 @interface DetailViewController ()<UIWebViewDelegate, DPRequestDelegate>
@@ -41,7 +41,6 @@
     self.view.backgroundColor = MTGlobalBg;    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.deal.deal_h5_url]];
     [self.webView loadRequest:request];
-    NSLog(@"添加了一句备注");
     //设置基本信息
     self.titleLabel.text = self.deal.title;
     self.descLabel.text = self.deal.desc;
@@ -66,17 +65,27 @@
     [api requestWithURL:@"v1/deal/get_single_deal" params:params delegate:self];
     
     // 设置收藏状态
-    self.collectBtn.selected = [DealTool isCollected:self.deal];
+    BOOL isSel = [DealTool isCollected:self.deal];
+    self.collectBtn.selected = isSel;
     
 }
 
 - (IBAction)collect:(id)sender {
+    NSMutableDictionary *info = [NSMutableDictionary dictionary];
+    info[CollectDealKey] = self.deal;
     if (self.collectBtn.isSelected) {
         [DealTool removeCollectDeal:self.deal];
+        info[IsCollectKey] = @NO;
+        [MBProgressHUD showSuccess:@"移除收藏成功" toView:self.view];
     }else{
         [DealTool addCollectDeal:self.deal];
+        info[IsCollectKey] = @YES;
+        [MBProgressHUD showSuccess:@"添加收藏成功" toView:self.view];
+
+
     }
     self.collectBtn.selected = !self.collectBtn.isSelected;
+    [MTNotificationCenter postNotificationName:CollectStateDidChangeNotification object:nil userInfo:info];
 }
 
 #pragma mark -- UIWebViewDelegate

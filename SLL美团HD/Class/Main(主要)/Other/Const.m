@@ -21,3 +21,7 @@
     NSString *const SortDidChangeNotification = @"SortDidChangeNotification";
     NSString *const SelectSort = @"SelectSortName";
 
+    NSString *const CollectStateDidChangeNotification = @"CollectStateDidChangeNotification";
+    NSString *const IsCollectKey = @"IsCollectKey";
+    NSString *const CollectDealKey = @"CollectDealKey";
+
