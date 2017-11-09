@@ -69,8 +69,19 @@
     self.collectBtn.selected = isSel;
     
 }
+#define IS_IOS8_2 ([[[UIDevice currentDevice] systemVersion] floatValue] >= __IPHONE_8_2)
 
+#ifdef IS_IOS8_2
+#define FontSize(CGFloat) [UIFont fontWithName:@"Helvetica" size:CGFloat]
+#else
+#define FontSize(CGFloat)  [UIFont systemFontOfSize:CGFloat weight:UIFontWeightLight]
+#endif
 - (IBAction)collect:(id)sender {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        //设备为ipad
+    } else {
+        //设备为iphone 或 ipod
+    }
     NSMutableDictionary *info = [NSMutableDictionary dictionary];
     info[CollectDealKey] = self.deal;
     if (self.collectBtn.isSelected) {

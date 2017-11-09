@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *listPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *purchaseCountLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *dealNewImageView;
+@property (weak, nonatomic) IBOutlet UIButton *cover;
+@property (weak, nonatomic) IBOutlet UIImageView *checkImageView;
+- (IBAction)coverBtnClick:(UIButton *)sender;
 
 @end
 
@@ -49,10 +52,24 @@
     // 隐藏: 发布日期 < 今天
     self.dealNewImageView.hidden = ([deal.publish_date compare:nowDate] == NSOrderedAscending);
     
+    self.cover.hidden = !deal.isEditting;
+    self.checkImageView.hidden = !deal.isChecking;
+
+    
+    
 }
 - (void)drawRect:(CGRect)rect{
     [[UIImage imageNamed:@"bg_dealcell"] drawInRect:rect];
     
 }
 
+- (IBAction)coverBtnClick:(UIButton *)sender {
+    self.deal.checking = !self.deal.isChecking;
+    self.checkImageView.hidden = !self.deal.isChecking;
+    
+    if ([self.delegate respondsToSelector:@selector(dealCellCoverDidChange:)]) {
+        [self.delegate dealCellCoverDidChange:self];
+    }
+    
+}
 @end

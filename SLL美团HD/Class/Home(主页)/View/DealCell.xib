@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -96,21 +96,43 @@
                             <constraint firstAttribute="width" constant="38" id="kgm-vP-vID" userLabel="width = 38"/>
                         </constraints>
                     </imageView>
+                    <button hidden="YES" opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDm-CE-tLZ">
+                        <rect key="frame" x="0.0" y="0.0" width="305" height="305"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="coverBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="29D-Sq-jr5"/>
+                        </connections>
+                    </button>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_choosed" translatesAutoresizingMaskIntoConstraints="NO" id="PYh-mf-pmU">
+                        <rect key="frame" x="279" y="279" width="26" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="26" id="QeR-Cm-VFj"/>
+                            <constraint firstAttribute="height" constant="26" id="ohd-N2-FXg"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="NJy-g0-TJC" firstAttribute="top" secondItem="yIC-9L-MMj" secondAttribute="bottom" id="0Um-8I-YI9"/>
+                <constraint firstAttribute="bottom" secondItem="PYh-mf-pmU" secondAttribute="bottom" id="39x-08-bRv"/>
                 <constraint firstItem="NJy-g0-TJC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4bm-QT-WgA"/>
                 <constraint firstItem="Ik4-0o-ols" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="71B-wG-fYq"/>
                 <constraint firstItem="Ik4-0o-ols" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="9AX-U8-GAD"/>
+                <constraint firstItem="rDm-CE-tLZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Am9-cq-wNq"/>
+                <constraint firstAttribute="bottom" secondItem="rDm-CE-tLZ" secondAttribute="bottom" id="BSL-kb-q3G"/>
                 <constraint firstItem="yIC-9L-MMj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="DID-59-1Sb"/>
+                <constraint firstAttribute="trailing" secondItem="rDm-CE-tLZ" secondAttribute="trailing" id="Dhg-Ce-KRy"/>
                 <constraint firstItem="yIC-9L-MMj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Ho6-3a-BJh"/>
                 <constraint firstAttribute="bottom" secondItem="NJy-g0-TJC" secondAttribute="bottom" id="LqD-Wm-gS1"/>
+                <constraint firstItem="rDm-CE-tLZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="PMn-rG-5Qt"/>
                 <constraint firstAttribute="trailing" secondItem="NJy-g0-TJC" secondAttribute="trailing" id="Qll-oU-9jI"/>
+                <constraint firstAttribute="trailing" secondItem="PYh-mf-pmU" secondAttribute="trailing" id="ZiK-OY-WBf"/>
                 <constraint firstAttribute="trailing" secondItem="yIC-9L-MMj" secondAttribute="trailing" id="cR1-2n-n3w"/>
             </constraints>
             <size key="customSize" width="188" height="227"/>
             <connections>
+                <outlet property="checkImageView" destination="PYh-mf-pmU" id="rT2-Cj-L3b"/>
+                <outlet property="cover" destination="rDm-CE-tLZ" id="m1Z-Q8-UCx"/>
                 <outlet property="currentPriceLabel" destination="OOn-97-0Xk" id="xSf-xJ-Xa8"/>
                 <outlet property="dealNewImageView" destination="Ik4-0o-ols" id="sAV-l0-K5I"/>
                 <outlet property="descLabel" destination="Ucf-7V-5QF" id="Xwi-NS-qVI"/>
@@ -119,10 +141,11 @@
                 <outlet property="purchaseCountLabel" destination="PnG-7f-B0n" id="kPX-rI-WuX"/>
                 <outlet property="titleLabel" destination="SMY-zi-jWP" id="vDu-l1-MlS"/>
             </connections>
-            <point key="canvasLocation" x="-300" y="213"/>
+            <point key="canvasLocation" x="-283" y="153"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="ic_choosed" width="26" height="26"/>
         <image name="ic_deal_new" width="38" height="24"/>
         <image name="placeholder_deal" width="273" height="172"/>
     </resources>

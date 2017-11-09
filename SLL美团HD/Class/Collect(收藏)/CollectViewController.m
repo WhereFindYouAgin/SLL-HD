@@ -11,8 +11,10 @@
 #import "UIView+Extension.h"
 #import "UIView+AutoLayout.h"
 #import "MJRefresh.h"
+#import "MJExtension.h"
 
 #import "Const.h"
+#import "Deal.h"
 #import "DealTool.h"
 #import "DealCell.h"
 #import "DetailViewController.h"
@@ -21,7 +23,7 @@ NSString *const MTDone = @"完成";
 NSString *const MTEdit = @"编辑";
 #define MTString(str) [NSString stringWithFormat:@"  %@  ", str]
 
-@interface CollectViewController ()
+@interface CollectViewController ()<DealCellDelegate>
 @property (nonatomic, weak) UIImageView *noDataView;
 
 @property (nonatomic, strong) NSMutableArray *deals;
@@ -72,6 +74,7 @@ static NSString * const reuseIdentifier = @"dealCell";
 - (UIBarButtonItem *)removeItem{
     if (!_removeItem) {
         _removeItem = [[UIBarButtonItem alloc] initWithTitle:MTString(@"删除") style:UIBarButtonItemStyleDone target:self action:@selector(remove)];
+        _removeItem.enabled = NO;
     }
     return _removeItem;
 }
@@ -100,7 +103,6 @@ static NSString * const reuseIdentifier = @"dealCell";
     self.collectionView.backgroundColor = MTGlobalBg;
     [self.collectionView registerNib:[UINib nibWithNibName:@"DealCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     self.collectionView.alwaysBounceVertical = YES;
-    
     self.title = @"个人收藏";
     self.navigationItem.leftBarButtonItem = self.backItem;
     [self loadMoreDeals];
@@ -114,11 +116,24 @@ static NSString * const reuseIdentifier = @"dealCell";
     if ([item.title isEqualToString:MTEdit]) {
         item.title = MTDone;
         self.navigationItem.leftBarButtonItems = @[self.backItem, self.selectAllItem,  self.unselectAllItem, self.removeItem];
+        //设置编辑状态
+        for (Deal *deal in self.deals ) {
+            deal.editing = YES;
+        }
     }else{
         item.title = MTEdit;
         self.navigationItem.leftBarButtonItems = @[self.backItem];
+        //设置编辑状态
+        for (Deal *deal in self.deals ) {
+            deal.editing = NO;
+            deal.checking = NO;
+        }
     }
-    
+    for (Deal *deal in self.deals) {
+        NSLog(@"%ld", deal.isChecking);
+    }
+    self.removeItem.enabled = NO;
+    [self.collectionView reloadData];
 }
 - (void)loadMoreDeals{
     self.currentPage ++;
@@ -173,7 +188,7 @@ static NSString * const reuseIdentifier = @"dealCell";
    DealCell  *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     cell.deal = self.deals[indexPath.item];
-    
+    cell.delegate = self;
     return cell;
 }
 
@@ -185,11 +200,56 @@ static NSString * const reuseIdentifier = @"dealCell";
     [self presentViewController:detailVc animated:YES completion:nil];
 }
 
+#pragma mark -- DealCellDelegate
+
+- (void)dealCellCoverDidChange:(DealCell *)cell{
+    BOOL romveEnabled = NO;
+
+    for (Deal *deal in self.deals) {
+        if (deal.isChecking) {
+            romveEnabled = YES;
+        }
+    }
+    self.removeItem.enabled = romveEnabled;
+}
 
 
 - (void)back
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)selctAll
+{
+    for (Deal *deal in self.deals) {
+        deal.checking =YES;
+    }
+    self.removeItem.enabled = YES;
+    [self.collectionView reloadData];
+}
+
+- (void)unselctAll
+{
+    for (Deal *deal in self.deals) {
+        deal.checking = NO;
+    }
+    self.removeItem.enabled = NO;
+
+    [self.collectionView reloadData];
+}
+
+- (void)remove
+{
+    NSMutableArray *removArr = [NSMutableArray array];
+    for (Deal *deal in self.deals) {
+        if (deal.isChecking) {
+            [removArr addObject:deal];
+            [DealTool removeCollectDeal:deal];
+
+        }
+    }
+    [self.deals removeObjectsInArray:removArr];
+    [self.collectionView reloadData];
 }
 
 @end
